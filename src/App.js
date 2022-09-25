@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+// Main
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+// Components
+import ScoreCard from './components/ScoreCard'
+import Container from '@mui/material/Container'
+import Stack from '@mui/material/Stack'
 
-function App() {
+// Css
+import './App.css'
+import { minWidth } from '@mui/system'
+
+const App = () => {
+
+  const [loading, setLoading] = useState(false)
+  const [scoreData, setScoreData] = useState()
+
+  useEffect(() => {
+    const getScores = async () => {
+      setLoading(true)
+      const url = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
+      const request = await axios.get(url)
+      setScoreData(request.data)
+      setLoading(false)
+    }
+    getScores()
+  }, [])
+
+  // TODO Data isn't returned yet, need to make this prettier
+  if(loading) {
+    return (
+      <h1>...Loading</h1>
+    )
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Container
+      maxWidth="lg"
+      >
+        <Stack
+        direction="row"
+        gap={2}
+        sx={{
+          flexWrap: "wrap",
+          justifyContent: "center"
+        }}
         >
-          Learn React
-        </a>
-      </header>
+          {scoreData?.events?.map(score => 
+            (
+              <ScoreCard event={score}/>
+            )
+          )}
+        </Stack>
+      </Container>
     </div>
   );
 }
 
-export default App;
+export default App
