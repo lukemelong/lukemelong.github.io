@@ -8,7 +8,6 @@ import Stack from '@mui/material/Stack'
 
 // Css
 import './App.css'
-import { minWidth } from '@mui/system'
 
 const App = () => {
 
@@ -18,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const getScores = async () => {
       setLoading(true)
-      const url = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
+      const url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
       const request = await axios.get(url)
       setScoreData(request.data)
       setLoading(false)
