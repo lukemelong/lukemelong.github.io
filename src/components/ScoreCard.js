@@ -13,8 +13,11 @@ import Typography from '@mui/material/Typography'
  */
 const ScoreCard = ({ game }) => {
     if(!game) return
-    const homeTeam = game.competitions[0].competitors[0]
-    const awayTeam = game.competitions[0].competitors[1]
+    const {
+        awayTeam,
+        detail,
+        homeTeam,
+    } = game
 
     return (
         <Card
@@ -28,10 +31,22 @@ const ScoreCard = ({ game }) => {
                 container
                 alignItems="center"
                 >
+                    <Grid item xs={8}>
+                        <Typography
+                        align='left'
+                        >
+                            {detail}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Typography>
+                            {}
+                        </Typography>
+                    </Grid>
                     <Grid item xs={4}>
                         <TeamLogo 
-                        teamName={awayTeam.team.displayName}
-                        src={awayTeam.team.logo}
+                        teamName={awayTeam.displayName}
+                        src={awayTeam.logo}
                         />
                     </Grid>
                     <Grid item xs={8}>
@@ -39,8 +54,8 @@ const ScoreCard = ({ game }) => {
                     </Grid>
                     <Grid item xs={4}>
                         <TeamLogo 
-                        teamName={homeTeam.team.displayName}
-                        src={homeTeam.team.logo}
+                        teamName={homeTeam.displayName}
+                        src={homeTeam.logo}
                         />
                     </Grid>
                     <Grid item xs={8}>

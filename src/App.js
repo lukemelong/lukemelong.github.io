@@ -22,6 +22,7 @@ const App = () => {
       <h1>...Loading</h1>
     )
   }
+
   return (
       <Container
       maxWidth="lg"
@@ -34,9 +35,9 @@ const App = () => {
           justifyContent: "center"
         }}
         >
-          {scoreData?.events?.map(game => 
+          {scoreData?.map(game => 
             (
-              <ScoreCard 
+              <ScoreCard
               game={game}
               key={game.id}
               />
