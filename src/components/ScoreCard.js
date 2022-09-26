@@ -35,20 +35,19 @@ const ScoreCard = ({ game, isDarkMode }) => {
     // Stylings
     const possessionIconStyles = {
         width: 15,
-        margin: 1
+        marginLeft: 2
     }
     const timerStyles = {
-        fontSize: "0.8rem"
+        fontSize: '0.8rem'
+    }
+    const cardStyles = {
+        bgcolor: isRedZone ? redZoneColor : '',
+        color: isRedZone ? 'white' : '',
+        width: 300,
     }
 
     return (
-        <Card
-        sx={{
-            bgcolor: isRedZone ? redZoneColor : '',
-            color: isRedZone ? 'white' : '',
-            width: 300,
-        }}
-        >
+        <Card sx={{...cardStyles}}>
             <CardContent>
                 <Grid
                 container
@@ -56,11 +55,7 @@ const ScoreCard = ({ game, isDarkMode }) => {
                 >
                     {/* Row 1: Game status (Upcoming, In progress, Final) */}
                     <Grid item xs={8}>
-                        <Typography
-                        sx={{...timerStyles}}
-                        >
-                            {gameDetail}
-                        </Typography>
+                        <Typography sx={{...timerStyles}}>{gameDetail}</Typography>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography>
@@ -68,22 +63,26 @@ const ScoreCard = ({ game, isDarkMode }) => {
                         </Typography>
                     </Grid>
                     {/* Row 2: Away Team */}
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <TeamLogo
                         teamName={awayTeam.displayName}
                         src={awayTeam.logo}
                         />
+                    </Grid>
+                    <Grid item xs={2}>
                         {displayPossession && !teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={8}>
                         <Typography>{awayTeam.score}</Typography>
                     </Grid>
                     {/* Row 3: Home Team */}
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <TeamLogo
                         teamName={homeTeam.displayName}
                         src={homeTeam.logo}
                         />
+                    </Grid>
+                    <Grid item xs={2}>
                         {displayPossession && teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={8}>
@@ -91,7 +90,7 @@ const ScoreCard = ({ game, isDarkMode }) => {
                     </Grid>
                     {/*  Row 4: Current down information */}
                     <Grid item>
-                        <Typography>{downDistanceText ? downDistanceText : ''}</Typography>
+                        <Typography sx={{...timerStyles}}>{downDistanceText ? downDistanceText : ''}</Typography>
                     </Grid>
                 </Grid>
             </CardContent>

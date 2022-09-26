@@ -23,18 +23,6 @@ const App = () => {
   const [loading, setLoading] = useState(false)
   const [gameData, setGameData] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
-  // Styles
-  const theme = createTheme({
-    palette: {
-      mode: isDarkMode ? 'dark' : 'light',
-    },
-  });
-  // Input Props
-  const darkModeSwitchProps = {
-    inputProps: {
-      'aria-label': 'Dark Mode'
-    }
-  }
   // Event listeners
   const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
@@ -49,12 +37,29 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('darkMode', '' + isDarkMode)
   }, [isDarkMode])
-
+  
   // TODO Data isn't returned yet, need to make this prettier
   if(loading) {
     return (
       <h1>...Loading</h1>
     )
+  }
+
+  // Styles
+  const theme = createTheme({
+    palette: {
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+  });
+  const gameStackStyles = {
+    flexWrap: "wrap",
+    justifyContent: "center"
+  }
+  // Input Props
+  const darkModeSwitchProps = {
+    inputProps: {
+      'aria-label': 'Dark Mode'
+    }
   }
 
   return (
@@ -76,10 +81,7 @@ const App = () => {
           <Stack
           direction="row"
           gap={2}
-          sx={{
-            flexWrap: "wrap",
-            justifyContent: "center"
-          }}
+          sx={{...gameStackStyles}}
           >
             {gameData?.map(game =>
               (
