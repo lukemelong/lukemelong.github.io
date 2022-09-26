@@ -30,7 +30,9 @@ const App = () => {
   // Effects
   // Get sports scores data (currently only for NFL games)
   useEffect(() => {
-    setIsDarkMode(Boolean(localStorage.getItem('darkMode')))
+    if(localStorage.getItem('darkMode') === 'true'){
+      setIsDarkMode(true)
+    }
     getGameData(setLoading, setGameData, testData, isTestMode)
   }, [isTestMode])
   // Set theme preference in localstorage
