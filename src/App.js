@@ -1,12 +1,11 @@
 // Main
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 // Components
 import Container from '@mui/material/Container'
 import ScoreCard from './components/ScoreCard'
 import Stack from '@mui/material/Stack'
-// Css
-import './App.css'
+// Utils
+import { getScoreData } from './utils'
 
 const App = () => {
 
@@ -14,14 +13,7 @@ const App = () => {
   const [scoreData, setScoreData] = useState()
 
   useEffect(() => {
-    const getScores = async () => {
-      setLoading(true)
-      const url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
-      const request = await axios.get(url)
-      setScoreData(request.data)
-      setLoading(false)
-    }
-    getScores()
+    getScoreData(setLoading, setScoreData)
   }, [])
 
   // TODO Data isn't returned yet, need to make this prettier
@@ -31,7 +23,6 @@ const App = () => {
     )
   }
   return (
-    <div className="App">
       <Container
       maxWidth="lg"
       >
@@ -53,7 +44,6 @@ const App = () => {
           )}
         </Stack>
       </Container>
-    </div>
   );
 }
 
