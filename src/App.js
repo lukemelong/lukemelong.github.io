@@ -84,6 +84,7 @@ const App = () => {
               (
                 <ScoreCard
                 game={game}
+                isDarkMode={isDarkMode}
                 key={game.id}
                 />
               )

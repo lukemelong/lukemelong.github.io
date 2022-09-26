@@ -11,18 +11,23 @@ import Typography from '@mui/material/Typography'
  * @param {Object} game The data related to one sports game
  * @returns 
  */
-const ScoreCard = ({ game }) => {
+const ScoreCard = ({ game, isDarkMode }) => {
     if(!game) return
     const {
         awayTeam,
         detail,
         downDistanceText,
         homeTeam,
+        isRedZone,
     } = game
+    // Styling for when a team is in the redzone (https://en.wikipedia.org/wiki/Red_zone_(gridiron_football))
+    const redZoneColor = isDarkMode ? '#880808' : '#D22B2B'
 
     return (
         <Card
         sx={{
+            bgcolor: isRedZone ? redZoneColor : '',
+            color: isRedZone ? 'white' : '',
             width: 300,
         }}
         >

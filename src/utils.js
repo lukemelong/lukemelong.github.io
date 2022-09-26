@@ -16,7 +16,10 @@ const formatGameData = (games) => {
         id = competition.id,
         homeTeam = competition.competitors[0],
         awayTeam = competition.competitors[1],
+        situation = competition.situation,
         downDistanceText = competition?.situation?.downDistanceText,
+        isRedZone = situation?.isRedZone,
+        possession = situation?.possession,
         { 
             status: {
                 type: { 
@@ -30,6 +33,8 @@ const formatGameData = (games) => {
             detail,
             downDistanceText,
             id,
+            isRedZone,
+            possession,
             // Teams
             homeTeam: {
                 displayName: homeTeam.team.displayName,
