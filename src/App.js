@@ -8,7 +8,7 @@ import ScoreCard from './components/ScoreCard'
 import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
 // Utils
-import { getScoreData } from './utils'
+import { getGameData } from './utils'
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 // Testing
@@ -19,21 +19,16 @@ const App = () => {
   // Enable testing mode. Will use local TestingData. You can set testing data by importing a local json file
   const isTestMode = true
 
-  // Styles
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
-  const lightTheme = createTheme({
-      palette: {
-        mode: 'light',
-      },
-  })
   // State
   const [loading, setLoading] = useState(false)
-  const [scoreData, setScoreData] = useState()
+  const [gameData, setGameData] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
+  // Styles
+  const theme = createTheme({
+    palette: {
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+  });
   // Input Props
   const darkModeSwitchProps = {
     inputProps: {
@@ -48,7 +43,7 @@ const App = () => {
   // Get sports scores data (currently only for NFL games)
   useEffect(() => {
     setIsDarkMode(Boolean(localStorage.getItem('darkMode')))
-    getScoreData(setLoading, setScoreData, testData, isTestMode)
+    getGameData(setLoading, setGameData, testData, isTestMode)
   }, [isTestMode])
   // Set theme preference in localstorage
   useEffect(() => {
@@ -64,7 +59,7 @@ const App = () => {
 
   return (
       <ThemeProvider
-      theme={isDarkMode ? darkTheme  : lightTheme}
+      theme={theme}
       >
         <CssBaseline />
         <Container
@@ -86,7 +81,7 @@ const App = () => {
             justifyContent: "center"
           }}
           >
-            {scoreData?.map(game =>
+            {gameData?.map(game =>
               (
                 <ScoreCard
                 game={game}

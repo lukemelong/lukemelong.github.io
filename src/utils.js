@@ -1,8 +1,69 @@
 import axios from 'axios'
 
-export const getScoreData = async (setLoading, setScoreData, testData, isTestMode) => {
+/**
+ * Takes in raw API data and formats it for display
+ *
+ * @param {Array} games The raw data returned from the api
+ * @returns An array with formatted game data for each game that day
+ */
+ const formatGameData = (games) => {
+    return  games.events.map(game => {
+        const competition = game.competitions[0]
+        const id = competition.id
+        const homeTeam = competition.competitors[0]
+        const awayTeam = competition.competitors[1]
+        const situation = competition.situation
+        const downDistanceText = competition?.situation?.downDistanceText
+        const isRedZone = situation?.isRedZone
+        const possession = situation?.possession
+        const {
+            status: {
+                type: {
+                    completed: gameCompleted,
+                    detail: gameDetail,
+                    state: gameState,
+                }
+            }
+        } = competition
+
+        return {
+            // Game variables
+            downDistanceText,
+            gameCompleted,
+            gameDetail,
+            gameState,
+            id,
+            isRedZone,
+            possession,
+            // Teams
+            homeTeam: {
+                id: homeTeam.id,
+                displayName: homeTeam.team.displayName,
+                logo: homeTeam.team.logo,
+                score: homeTeam.score
+            },
+            awayTeam: {
+                id: awayTeam.id,
+                displayName: awayTeam.team.displayName,
+                logo: awayTeam.team.logo,
+                score: awayTeam.score
+            }
+        }
+    })
+}
+
+/**
+ * Retrieves sport score data and formats it for display
+ *
+ * @param {Function} setLoading Setter function for loading
+ * @param {Function} setGameData Setter function for gameData
+ * @param {Object} testData MOCK JSON data for testing purposes
+ * @param {Object} isTestMode Indicates wether to use testData or retrieve remote data
+ * @returns
+ */
+export const getGameData = async (setLoading, setGameData, testData, isTestMode) => {
     if(isTestMode){
-        setScoreData(formatGameData(testData))
+        setGameData(formatGameData(testData))
         return
     }
     setLoading(true)
@@ -10,48 +71,8 @@ export const getScoreData = async (setLoading, setScoreData, testData, isTestMod
     const request = await axios.get(url)
     const scoreData = formatGameData(request.data)
 
-    setScoreData(scoreData)
+    setGameData(scoreData)
     setLoading(false)
-}
-
-const formatGameData = (games) => {
-    return  games.events.map(game => {
-        const competition = game.competitions[0],
-        id = competition.id,
-        homeTeam = competition.competitors[0],
-        awayTeam = competition.competitors[1],
-        situation = competition.situation,
-        downDistanceText = competition?.situation?.downDistanceText,
-        isRedZone = situation?.isRedZone,
-        possession = situation?.possession,
-        {
-            status: {
-                type: {
-                    detail
-                }
-            }
-        } = competition
-
-        return {
-            // Game variables
-            detail,
-            downDistanceText,
-            id,
-            isRedZone,
-            possession,
-            // Teams
-            homeTeam: {
-                displayName: homeTeam.team.displayName,
-                logo: homeTeam.team.logo,
-                score: homeTeam.score
-            },
-            awayTeam: {
-                displayName: awayTeam.team.displayName,
-                logo: awayTeam.team.logo,
-                score: awayTeam.score
-            }
-        }
-    })
 }
 /*
 [
