@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 // Components
 import Container from '@mui/material/Container'
+import Loading from './components/Loading';
 import ScoreCard from './components/ScoreCard'
 import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
@@ -20,12 +21,17 @@ const App = () => {
   const isTestMode = false
 
   // State
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [gameData, setGameData] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
   // Event listeners
   const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
+  }
+  // Refresh callback
+  const refreshGameData = () => {
+    getGameData(setLoading, false, setGameData, testData, isTestMode)
+    console.log("Got new game data")
   }
   // Effects
   // Get sports scores data (currently only for NFL games)
@@ -33,19 +39,15 @@ const App = () => {
     if(localStorage.getItem('darkMode') === 'true'){
       setIsDarkMode(true)
     }
-    getGameData(setLoading, setGameData, testData, isTestMode)
-  }, [isTestMode])
+    getGameData(setLoading, true, setGameData, testData, isTestMode)
+    const refreshInterval = setInterval(refreshGameData, 5000)
+    return () => clearTimeout(refreshInterval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   // Set theme preference in localstorage
   useEffect(() => {
     localStorage.setItem('darkMode', '' + isDarkMode)
   }, [isDarkMode])
-
-  // TODO Data isn't returned yet, need to make this prettier
-  if(loading) {
-    return (
-      <h1>...Loading</h1>
-    )
-  }
 
   // Styles
   const theme = createTheme({
@@ -72,29 +74,37 @@ const App = () => {
         <Container
         maxWidth="xxl"
         >
-          <Box>
-            <Typography display="inline">Dark Mode</Typography>
-            <Switch
-            {...darkModeSwitchProps}
-            onChange={darkModeSwitchOnChange}
-            checked={isDarkMode}
-            />
-          </Box>
-          <Stack
-          direction="row"
-          gap={2}
-          sx={{...gameStackStyles}}
-          >
-            {gameData?.map(game =>
-              (
-                <ScoreCard
-                game={game}
-                isDarkMode={isDarkMode}
-                key={game.id}
-                />
-              )
-            )}
-          </Stack>
+          {
+          loading ?
+          <Loading
+          isDarkMode={isDarkMode}
+          /> :
+          <>
+            <Box>
+              <Typography display="inline">Dark Mode</Typography>
+              <Switch
+              {...darkModeSwitchProps}
+              onChange={darkModeSwitchOnChange}
+              checked={isDarkMode}
+              />
+            </Box>
+            <Stack
+            direction="row"
+            gap={2}
+            sx={{...gameStackStyles}}
+            >
+              {gameData?.map(game =>
+                (
+                  <ScoreCard
+                  game={game}
+                  isDarkMode={isDarkMode}
+                  key={game.id}
+                  />
+                )
+              )}
+            </Stack>
+          </>
+        }
         </Container>
       </ThemeProvider>
   );
