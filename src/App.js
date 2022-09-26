@@ -9,9 +9,8 @@ import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
 // Utils
 import { getScoreData } from './utils'
-import { dark } from '@mui/material/styles/createPalette';
 import { Box } from '@mui/system';
-import { Grid, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const App = () => {
   // Styles
@@ -63,7 +62,7 @@ const App = () => {
       >
         <CssBaseline />
         <Container
-        maxWidth="lg"
+        maxWidth="xxl"
         >
           <Box>
             <Typography display="inline">Dark Mode</Typography>

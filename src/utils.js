@@ -16,11 +16,19 @@ const formatGameData = (games) => {
         id = competition.id,
         homeTeam = competition.competitors[0],
         awayTeam = competition.competitors[1],
-        { type: { detail } } = competition.status
+        downDistanceText = competition?.situation?.downDistanceText,
+        { 
+            status: {
+                type: { 
+                    detail 
+                }
+            }
+        } = competition
 
         return {
             // Game variables
             detail,
+            downDistanceText,
             id,
             // Teams
             homeTeam: {

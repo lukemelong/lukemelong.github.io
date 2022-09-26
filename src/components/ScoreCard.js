@@ -16,14 +16,14 @@ const ScoreCard = ({ game }) => {
     const {
         awayTeam,
         detail,
+        downDistanceText,
         homeTeam,
     } = game
 
     return (
         <Card
         sx={{
-            maxWidth: 450,
-            minWidth: 300
+            width: 300,
         }}
         >
             <CardContent>
@@ -31,6 +31,7 @@ const ScoreCard = ({ game }) => {
                 container
                 alignItems="center"
                 >
+                    {/* Row 1: Game status (Upcoming, In progress, Final) */}
                     <Grid item xs={8}>
                         <Typography
                         align='left'
@@ -43,6 +44,7 @@ const ScoreCard = ({ game }) => {
                             {}
                         </Typography>
                     </Grid>
+                    {/* Row 2: Away Team */}
                     <Grid item xs={4}>
                         <TeamLogo 
                         teamName={awayTeam.displayName}
@@ -52,6 +54,7 @@ const ScoreCard = ({ game }) => {
                     <Grid item xs={8}>
                         <Typography>{awayTeam.score}</Typography>
                     </Grid>
+                    {/* Row 3: Home Team */}
                     <Grid item xs={4}>
                         <TeamLogo 
                         teamName={homeTeam.displayName}
@@ -60,6 +63,10 @@ const ScoreCard = ({ game }) => {
                     </Grid>
                     <Grid item xs={8}>
                         <Typography>{homeTeam.score}</Typography>
+                    </Grid>
+                    {/*  Row 4: Current down information */}
+                    <Grid item>
+                        <Typography>{downDistanceText ? downDistanceText : ''}</Typography>
                     </Grid>
                 </Grid>
             </CardContent>
