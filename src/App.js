@@ -1,11 +1,10 @@
 // Main
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 // Components
-import ScoreCard from './components/ScoreCard'
 import Container from '@mui/material/Container'
+import ScoreCard from './components/ScoreCard'
 import Stack from '@mui/material/Stack'
-
 // Css
 import './App.css'
 
@@ -44,9 +43,12 @@ const App = () => {
           justifyContent: "center"
         }}
         >
-          {scoreData?.events?.map(score => 
+          {scoreData?.events?.map(game => 
             (
-              <ScoreCard event={score}/>
+              <ScoreCard 
+              game={game}
+              key={game.id}
+              />
             )
           )}
         </Stack>

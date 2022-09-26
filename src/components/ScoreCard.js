@@ -5,12 +5,16 @@ import Grid from '@mui/material/Grid'
 import TeamLogo from './TeamLogo'
 import Typography from '@mui/material/Typography'
 
-
-const ScoreCard = ({ event }) => {
-    if(!event) return
-    const homeTeam = event.competitions[0].competitors[0]
-    const awayTeam = event.competitions[0].competitors[1]
-    console.log(homeTeam.team.logo)
+/**
+ * ScoreCard shows the score for one sports game
+ * 
+ * @param {Object} game The data related to one sports game
+ * @returns 
+ */
+const ScoreCard = ({ game }) => {
+    if(!game) return
+    const homeTeam = game.competitions[0].competitors[0]
+    const awayTeam = game.competitions[0].competitors[1]
 
     return (
         <Card
@@ -20,28 +24,27 @@ const ScoreCard = ({ event }) => {
         }}
         >
             <CardContent>
-                <Grid container>
+                <Grid 
+                container
+                alignItems="center"
+                >
                     <Grid item xs={4}>
-                        {/* Home team logo  */}
-                        <TeamLogo 
-                        teamName={homeTeam.team.displayName}
-                        src={homeTeam.team.logo}
-                        />
-                    </Grid>
-                    <Grid item xs={8}>
-                        {/* Home Team Score */}
-                        <Typography>{homeTeam.score}</Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        {/* Away Team Logo */}
                         <TeamLogo 
                         teamName={awayTeam.team.displayName}
                         src={awayTeam.team.logo}
                         />
                     </Grid>
                     <Grid item xs={8}>
-                        {/* Away Team Score */}
                         <Typography>{awayTeam.score}</Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <TeamLogo 
+                        teamName={homeTeam.team.displayName}
+                        src={homeTeam.team.logo}
+                        />
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Typography>{homeTeam.score}</Typography>
                     </Grid>
                 </Grid>
             </CardContent>

@@ -1,3 +1,10 @@
+/**
+ * TeamLogo is a styled image for team logos
+ * 
+ * @param {String} teamName The name of the team
+ * @param {String} src The url for the team logo
+ * @returns 
+ */
 const TeamLogo = ({teamName, src}) => {
     return (
         <img
