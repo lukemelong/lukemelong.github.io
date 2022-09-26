@@ -35,13 +35,13 @@ const App = () => {
     }
   }
   // Event listeners
-  const darkModeSwitchOnClick = () => {
+  const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
   }
   // Effects
   // Get sports scores data (currently only for NFL games)
   useEffect(() => {
-    setIsDarkMode(localStorage.getItem('darkMode'))
+    setIsDarkMode(Boolean(localStorage.getItem('darkMode')))
     getScoreData(setLoading, setScoreData)
   }, [])
   // Set theme preference in localstorage
@@ -68,8 +68,8 @@ const App = () => {
             <Typography display="inline">Dark Mode</Typography>
             <Switch
             {...darkModeSwitchProps}
-            onClick={darkModeSwitchOnClick}
-            defaultChecked={isDarkMode}
+            onChange={darkModeSwitchOnChange}
+            checked={isDarkMode}
             />
           </Box>
           <Stack
