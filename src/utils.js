@@ -39,12 +39,14 @@ import axios from 'axios'
             homeTeam: {
                 id: homeTeam.id,
                 displayName: homeTeam.team.displayName,
+                name: homeTeam.team.name,
                 logo: homeTeam.team.logo,
                 score: homeTeam.score
             },
             awayTeam: {
                 id: awayTeam.id,
                 displayName: awayTeam.team.displayName,
+                name: awayTeam.team.name,
                 logo: awayTeam.team.logo,
                 score: awayTeam.score
             }
@@ -74,20 +76,3 @@ export const getGameData = async (setLoading, setGameData, testData, isTestMode)
     setGameData(scoreData)
     setLoading(false)
 }
-/*
-[
-    {
-        detail: string,
-        teams: {
-            homeTeam: {
-                displayName: string,
-                logo: string,
-                score: number
-            },
-            awayTeam: {
-                // Same as home team
-            }
-        }
-    }
-]
-*/
