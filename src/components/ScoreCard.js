@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
  * @param {Object} game The data related to one sports game
  * @returns
  */
-const ScoreCard = ({ game, isDarkMode }) => {
+const ScoreCard = ({ game, isDarkMode, scale }) => {
     if(!game) return
     const {
         awayTeam,
@@ -32,21 +32,21 @@ const ScoreCard = ({ game, isDarkMode }) => {
     const cardStyles = {
         bgcolor: isRedZone ? redZoneColor : '',
         color: isRedZone ? 'white' : '',
-        width: 300,
+        width: 300 * scale,
     }
     const timerStyles = {
-        fontSize: '0.8rem',
-        marginBottom: '0.5rem',
-        minHeight: '1rem'
+        fontSize: 12 * scale,
+        marginBottom: 1 * scale,
+        minHeight: 14 * scale
     }
     const downDistanceStyles = {
         ...timerStyles,
-        marginTop: '0.5rem',
-        marginBottom: '0',
+        marginTop: 1 * scale,
+        marginBottom: 0,
     }
     const possessionIconStyles = {
-        width: 15,
-        marginLeft: 2
+        width: 15 * scale,
+        marginLeft: 2 * scale
     }
     const scoreFontStyles = {
         textAlign: 'right'
@@ -69,6 +69,7 @@ const ScoreCard = ({ game, isDarkMode }) => {
                         <TeamLogo
                         teamName={awayTeam.displayName}
                         src={awayTeam.logo}
+                        scale={scale}
                         />
                     </Grid>
                     <Grid item xs={2}>
@@ -85,6 +86,7 @@ const ScoreCard = ({ game, isDarkMode }) => {
                         <TeamLogo
                         teamName={homeTeam.displayName}
                         src={homeTeam.logo}
+                        scale={scale}
                         />
                     </Grid>
                     <Grid item xs={2}>

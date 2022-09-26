@@ -21,9 +21,10 @@ const App = () => {
   const isTestMode = false
 
   // State
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [gameData, setGameData] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [scale, setScale] = useState(1)
   // Event listeners
   const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
@@ -48,12 +49,22 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('darkMode', '' + isDarkMode)
   }, [isDarkMode])
+  // Set app scale based on screen width
+  useEffect(() => {
+    if(window.innerWidth > 1536) setScale(1.5)
+    else setScale(1)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth])
+
 
   // Styles
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
     },
+    typography: {
+      fontSize: 14 * scale
+    }
   });
   const gameStackStyles = {
     flexWrap: "wrap",
@@ -96,9 +107,10 @@ const App = () => {
               {gameData?.map(game =>
                 (
                   <ScoreCard
+                  key={game.id}
                   game={game}
                   isDarkMode={isDarkMode}
-                  key={game.id}
+                  scale={scale}
                   />
                 )
               )}

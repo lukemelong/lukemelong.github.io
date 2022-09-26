@@ -5,10 +5,10 @@
  * @param {String} src The url for the team logo
  * @returns
  */
-const TeamLogo = ({teamName, src}) => {
+const TeamLogo = ({teamName, src, scale}) => {
     // Styles
     const teamLogoStyles = {
-        maxWidth: 50
+        maxWidth: 50 * scale
     }
     return (
         <img
