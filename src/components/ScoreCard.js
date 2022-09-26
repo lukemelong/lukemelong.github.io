@@ -43,6 +43,7 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
         ...timerStyles,
         marginTop: 1 * scale,
         marginBottom: 0,
+        minHeight: 14 * scale,
     }
     const possessionIconStyles = {
         width: 15 * scale,
@@ -99,7 +100,7 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         <Typography sx={{...scoreFontStyles}}>{homeTeam.score}</Typography>
                     </Grid>
                     {/*  Row 4: Current down information */}
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Typography sx={{...downDistanceStyles}}>{downDistanceText ? downDistanceText : ''}</Typography>
                     </Grid>
                 </Grid>
