@@ -11,8 +11,14 @@ import Switch from '@mui/material/Switch'
 import { getScoreData } from './utils'
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
+// Testing
+import testData from './mockData/broncos_9ers_inplay.json'
 
 const App = () => {
+
+  // Enable testing mode. Will use local TestingData. You can set testing data by importing a local json file
+  const isTestMode = true
+
   // Styles
   const darkTheme = createTheme({
     palette: {
@@ -42,8 +48,8 @@ const App = () => {
   // Get sports scores data (currently only for NFL games)
   useEffect(() => {
     setIsDarkMode(Boolean(localStorage.getItem('darkMode')))
-    getScoreData(setLoading, setScoreData)
-  }, [])
+    getScoreData(setLoading, setScoreData, testData, isTestMode)
+  }, [isTestMode])
   // Set theme preference in localstorage
   useEffect(() => {
     localStorage.setItem('darkMode', '' + isDarkMode)
@@ -80,7 +86,7 @@ const App = () => {
             justifyContent: "center"
           }}
           >
-            {scoreData?.map(game => 
+            {scoreData?.map(game =>
               (
                 <ScoreCard
                 game={game}

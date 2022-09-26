@@ -1,6 +1,10 @@
-import axios from "axios"
+import axios from 'axios'
 
-export const getScoreData = async (setLoading, setScoreData) => {
+export const getScoreData = async (setLoading, setScoreData, testData, isTestMode) => {
+    if(isTestMode){
+        setScoreData(formatGameData(testData))
+        return
+    }
     setLoading(true)
     const url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
     const request = await axios.get(url)
@@ -20,10 +24,10 @@ const formatGameData = (games) => {
         downDistanceText = competition?.situation?.downDistanceText,
         isRedZone = situation?.isRedZone,
         possession = situation?.possession,
-        { 
+        {
             status: {
-                type: { 
-                    detail 
+                type: {
+                    detail
                 }
             }
         } = competition
