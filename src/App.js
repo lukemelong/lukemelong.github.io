@@ -17,7 +17,7 @@ import testData from './mockData/broncos_9ers_inplay.json'
 const App = () => {
 
   // Enable testing mode. Will use local TestingData. You can set testing data by importing a local json file
-  const isTestMode = true
+  const isTestMode = false
 
   // State
   const [loading, setLoading] = useState(false)
@@ -37,7 +37,7 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('darkMode', '' + isDarkMode)
   }, [isDarkMode])
-  
+
   // TODO Data isn't returned yet, need to make this prettier
   if(loading) {
     return (
