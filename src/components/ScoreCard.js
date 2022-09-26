@@ -1,14 +1,10 @@
 // Components
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import SportsFootballIcon from '@mui/icons-material/SportsFootball';
 import TeamLogo from './TeamLogo'
 import Typography from '@mui/material/Typography'
-import { Scale } from '@mui/icons-material';
-import { getCardMediaUtilityClass } from '@mui/material';
-
 /**
  * ScoreCard shows the score for one sports game
  *
