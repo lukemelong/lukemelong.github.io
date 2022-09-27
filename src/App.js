@@ -1,17 +1,18 @@
 // Main
 import { useEffect, useState } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 // Components
 import Container from '@mui/material/Container'
-import Loading from './components/Loading';
+import Grid from '@mui/material/Grid'
+import Loading from './components/Loading'
 import ScoreCard from './components/ScoreCard'
+import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
 // Utils
 import { getGameData } from './utils'
-import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
 // Testing
 import testData from './mockData/broncos_9ers_inplay.json'
 
@@ -28,6 +29,9 @@ const App = () => {
   // Event listeners
   const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
+  }
+  const scaleOnChange = (e, newValue) => {
+    setScale(newValue)
   }
   // Refresh callback
   const refreshGameData = () => {
@@ -62,7 +66,7 @@ const App = () => {
       mode: isDarkMode ? 'dark' : 'light',
     },
     typography: {
-      fontSize: 14 * scale
+      fontSize: 14 * scale,
     }
   });
   const gameStackStyles = {
@@ -83,6 +87,7 @@ const App = () => {
         <CssBaseline />
         <Container
         maxWidth="xxl"
+        sx={{ marginTop: 2}}
         >
           {
           loading ?
@@ -90,30 +95,53 @@ const App = () => {
           isDarkMode={isDarkMode}
           /> :
           <>
-            <Box>
-              <Typography display="inline">Dark Mode</Typography>
-              <Switch
-              {...darkModeSwitchProps}
-              onChange={darkModeSwitchOnChange}
-              checked={isDarkMode}
-              />
-            </Box>
-            <Stack
-            direction="row"
-            gap={2}
-            sx={{...gameStackStyles}}
+            <Grid
+            container
+            spacing={4}
             >
-              {gameData?.map(game =>
-                (
-                  <ScoreCard
-                  key={game.id}
-                  game={game}
-                  isDarkMode={isDarkMode}
-                  scale={scale}
+              <Grid item xs={4}>
+                  <Typography display="inline">Dark Mode</Typography>
+                  <Switch
+                  {...darkModeSwitchProps}
+                  onChange={darkModeSwitchOnChange}
+                  checked={isDarkMode}
                   />
-                )
-              )}
-            </Stack>
+              </Grid>
+              <Grid item xs={8}>
+                <Stack
+                direction="row"
+                spacing={2}
+                >
+                  <Typography display="inline">Scale</Typography>
+                  <Slider
+                  onChange={scaleOnChange}
+                  step={0.01}
+                  min={0.8}
+                  max={2}
+                  value={scale}
+                  ></Slider>
+                </Stack>
+
+              </Grid>
+              <Grid item xs={12}>
+                <Stack
+                direction="row"
+                gap={2}
+                sx={{...gameStackStyles}}
+                >
+                  {gameData?.map(game =>
+                    (
+                      <ScoreCard
+                      key={game.id}
+                      game={game}
+                      isDarkMode={isDarkMode}
+                      scale={scale}
+                      />
+                    )
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
           </>
         }
         </Container>

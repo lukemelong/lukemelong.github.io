@@ -1,8 +1,6 @@
 // Components
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import SportsFootballIcon from '@mui/icons-material/SportsFootball';
 import TeamLogo from './TeamLogo'
@@ -55,12 +53,6 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
     }
     const scoreFontStyles = {
         textAlign: 'right'
-    }
-    const awayTeamStyles = {
-        fontWeight: gameCompleted && awayTeam.winner && 'bold'
-    }
-    const homeTeamStyles = {
-        fontWeight: gameCompleted && homeTeam.winner && 'bold'
     }
 
 
