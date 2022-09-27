@@ -1,10 +1,13 @@
 // Components
+import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import SportsFootballIcon from '@mui/icons-material/SportsFootball';
 import TeamLogo from './TeamLogo'
 import Typography from '@mui/material/Typography'
+
 /**
  * ScoreCard shows the score for one sports game
  *
@@ -29,6 +32,7 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
     const teamPossession = awayTeam.id === possession ? false : true
     const displayPossession = !gameCompleted && gameState !== "pre"
     // Stylings
+
     const cardStyles = {
         bgcolor: isRedZone ? redZoneColor : '',
         color: isRedZone ? 'white' : '',
@@ -51,6 +55,12 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
     }
     const scoreFontStyles = {
         textAlign: 'right'
+    }
+    const awayTeamStyles = {
+        fontWeight: gameCompleted && awayTeam.winner && 'bold'
+    }
+    const homeTeamStyles = {
+        fontWeight: gameCompleted && homeTeam.winner && 'bold'
     }
 
 
@@ -77,10 +87,10 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         {displayPossession && !teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography>{awayTeam.name}</Typography>
+                        <Typography fontWeight={awayTeam.winner && 'bold'}>{awayTeam.name}</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography sx={{...scoreFontStyles}}>{awayTeam.score}</Typography>
+                        <Typography sx={{...scoreFontStyles}} fontWeight={awayTeam.winner && 'bold'}>{awayTeam.score}</Typography>
                     </Grid>
                     {/* Row 3: Home Team */}
                     <Grid item xs={2}>
@@ -94,10 +104,10 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         {displayPossession && teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography>{homeTeam.name}</Typography>
+                        <Typography fontWeight={homeTeam.winner && 'bold'}>{homeTeam.name}</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography sx={{...scoreFontStyles}}>{homeTeam.score}</Typography>
+                        <Typography sx={{...scoreFontStyles}} fontWeight={homeTeam.winner && 'bold'}>{homeTeam.score}</Typography>
                     </Grid>
                     {/*  Row 4: Current down information */}
                     <Grid item xs={12}>

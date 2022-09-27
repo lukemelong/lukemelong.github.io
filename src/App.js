@@ -32,7 +32,6 @@ const App = () => {
   // Refresh callback
   const refreshGameData = () => {
     getGameData(setLoading, false, setGameData, testData, isTestMode)
-    console.log("Got new game data")
   }
   // Effects
   // Get sports scores data (currently only for NFL games)
@@ -51,7 +50,7 @@ const App = () => {
   }, [isDarkMode])
   // Set app scale based on screen width
   useEffect(() => {
-    if(window.innerWidth > 1536) setScale(1.5)
+    if(window.innerWidth > 1536) setScale(1.3)
     else setScale(1)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.innerWidth])

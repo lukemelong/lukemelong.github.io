@@ -41,14 +41,16 @@ import axios from 'axios'
                 displayName: homeTeam.team.displayName,
                 name: homeTeam.team.name,
                 logo: homeTeam.team.logo,
-                score: homeTeam.score
+                score: homeTeam.score,
+                winner: homeTeam.winner
             },
             awayTeam: {
                 id: awayTeam.id,
                 displayName: awayTeam.team.displayName,
                 name: awayTeam.team.name,
                 logo: awayTeam.team.logo,
-                score: awayTeam.score
+                score: awayTeam.score,
+                winner: awayTeam.winner
             }
         }
     })
