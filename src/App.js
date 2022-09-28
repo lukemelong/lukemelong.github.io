@@ -44,7 +44,7 @@ const App = () => {
       setIsDarkMode(true)
     }
     getGameData(setLoading, true, setGameData, testData, isTestMode)
-    const refreshInterval = setInterval(refreshGameData, 5000)
+    const refreshInterval = setInterval(refreshGameData, 10000)
     return () => clearTimeout(refreshInterval)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
