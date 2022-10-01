@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - eslint rules
 - This changelog file!
 - Error handling for bad network request
+## [Changed]
+- Updated README to remove react template
 
 ## [0.2.0] - 10/1/2022 12:56am
 ### [Added]

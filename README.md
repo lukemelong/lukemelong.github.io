@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# NFL Scoreboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+As a sports fan, I was unable to find a site that provided a clear NFL scoreboard that could be displayed on a large screen as a quick overview of the status of all games. This scoreboard provides a simple card based layout that can be scaled to any screen size for easy viewing. This app is available on [lukemelong.github.io](https://lukemelong.github.io/)
+
+## Features
+
+- Dark mode toggle
+- Scale slider to manually adjust UI for different screen sizes
+- Games will turn red to indicate a team in that game is in the red zone
+- Live game scores including: score, game clock, down information, and ball possession
+- Pre-game information includes: game time and date (currently in EDT) and team record
 
 ## Available Scripts
 
