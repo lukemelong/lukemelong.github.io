@@ -67,14 +67,31 @@ import axios from 'axios'
  * @param {Object} isTestMode Indicates wether to use testData or retrieve remote data
  * @returns
  */
-export const getGameData = async (setLoading, shouldShowLoading, setGameData, testData, isTestMode) => {
+export const getGameData = async (
+    isTestMode,
+    setError,
+    setGameData,
+    setLoading,
+    shouldShowLoading,
+    testData,
+) => {
     if(isTestMode){
         setGameData(formatGameData(testData))
         return
     }
+
     if (shouldShowLoading) setLoading(true)
     const url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
-    const request = await axios.get(url)
+    let request
+    try {
+        request = await axios.get(url)
+    }
+    catch (err) {
+        setLoading(false)
+        setError(err)
+        return
+    }
+
     const scoreData = formatGameData(request.data)
 
     setGameData(scoreData)

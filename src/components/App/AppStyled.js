@@ -24,9 +24,9 @@ export const GameStack = ({children, ...props}) => {
     return <Stack sx={style} {...props}>{children}</Stack>
 }
 
-export const MainContainer = ({children, ...props}) => {
+export const MainContainer = ({children, error, ...props}) => {
     const style = {
-        marginTop: 2
+        marginTop: error ? '' : 2
     }
 
     return <Container sx={style} {...props}>{children}</Container>
