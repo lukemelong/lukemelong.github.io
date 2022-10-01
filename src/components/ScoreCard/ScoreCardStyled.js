@@ -1,5 +1,6 @@
 import Card from '@mui/material/Card'
-import SportsFootballIcon from '@mui/icons-material/SportsFootball';
+import React from 'react'
+import SportsFootballIcon from '@mui/icons-material/SportsFootball'
 import Typography from '@mui/material/Typography'
 
 export const DownInfo = ({children, scale}) => {

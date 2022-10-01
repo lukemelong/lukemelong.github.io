@@ -1,7 +1,4 @@
 // Components
-import CardContent from '@mui/material/CardContent'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack';
 import {
     DownInfo,
     PossessionIcon,
@@ -12,6 +9,10 @@ import {
     TeamName,
     Timer
 } from './ScoreCard/ScoreCardStyled'
+import CardContent from '@mui/material/CardContent'
+import Grid from '@mui/material/Grid'
+import React from 'react'
+import Stack from '@mui/material/Stack'
 
 /**
  * ScoreCard shows the score for one sports game
@@ -33,7 +34,7 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
     } = game
     // Who has possession of the football. false is the away team, true is the home team
     const teamPossession = awayTeam.id === possession ? false : true
-    const displayPossession = !gameCompleted && gameState !== "pre"
+    const displayPossession = !gameCompleted && gameState !== 'pre'
 
     return (
         <ScoreCardContainer

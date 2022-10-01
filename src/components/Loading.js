@@ -1,4 +1,5 @@
 import { LoadingSpinnerContainer, LoadingSpinnerxChildren } from './Loading/LoadingStyled'
+import React from 'react'
 
 const Loading = ({ isDarkMode }) => {
     return (

@@ -1,10 +1,11 @@
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
 import MenuItem from '@mui/material/MenuItem'
+import React from 'react'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 export const DarkModeLabel = ({children}) => {
     const style = {
@@ -65,6 +66,7 @@ export const ScaleSliderLabel = ({children}) => {
 }
 
 export const ThemeWrapper = ({children, isDarkMode, scale}) => {
+
     const theme = createTheme({
         palette: {
             mode: isDarkMode ? 'dark' : 'light',

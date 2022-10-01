@@ -1,6 +1,18 @@
+
 // Main
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // Components
+// eslint-disable-next-line sort-imports
+import {
+  DarkModeLabel,
+  GameStack,
+  MainContainer,
+  MenuItemSlider,
+  ScaleSliderContainer,
+  ScaleSliderLabel,
+  SettingsButton,
+  ThemeWrapper,
+} from './components/App/AppStyled'
 import Grid from '@mui/material/Grid'
 import Loading from './components/Loading'
 import Menu from '@mui/material/Menu'
@@ -8,16 +20,6 @@ import MenuItem from '@mui/material/MenuItem'
 import ScoreCard from './components/ScoreCard'
 import Slider from '@mui/material/Slider'
 import Switch from '@mui/material/Switch'
-import {
-  DarkModeLabel,
-  GameStack,
-  MainContainer,
-  MenuItemSlider,
-  SettingsButton,
-  ScaleSliderContainer,
-  ThemeWrapper,
-  ScaleSliderLabel,
-} from './components/App/AppStyled'
 // Utils
 import { getGameData } from './utils'
 // Testing
@@ -62,7 +64,6 @@ const App = () => {
     getGameData(setLoading, true, setGameData, testData, isTestMode)
     const refreshInterval = setInterval(refreshGameData, 10000)
     return () => clearTimeout(refreshInterval)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // Set theme preference in localstorage
   useEffect(() => {
@@ -72,7 +73,6 @@ const App = () => {
   useEffect(() => {
     if(window.innerWidth > 1536) setScale(1.3)
     else setScale(1)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.innerWidth])
 
   // Input Props
@@ -161,7 +161,7 @@ const App = () => {
         }
         </MainContainer>
       </ThemeWrapper>
-  );
+  )
 }
 
 export default App
