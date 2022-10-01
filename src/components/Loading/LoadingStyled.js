@@ -1,6 +1,18 @@
-import styled from "@mui/system/styled"
+// Components
+import Box from '@mui/material/Box'
+import styled from '@mui/system/styled'
 
-export const LoadingSpinner = styled('div')((props) => ({
+
+export const LoadingSpinnerContainer = styled(Box)
+({
+  display: 'flex',
+  height: '100vh',
+  justifyContent: 'center',
+  alignItems: 'center'
+})
+
+export const LoadingSpinnerxChildren = styled('div')
+(({ isDarkMode }) => ({
   display: 'inline-block',
   position: 'relative',
   width: '80px',
@@ -12,7 +24,8 @@ export const LoadingSpinner = styled('div')((props) => ({
     width: '13px',
     height: '13px',
     borderRadius: '50%',
-    background: props.isDarkMode ? 'white' : 'black',
+    background:
+    isDarkMode ? 'white' : 'black',
     animationTimingFunction: 'cubic-bezier(0, 1, 1, 0)',
   },
   'div:nth-of-type(1)': {

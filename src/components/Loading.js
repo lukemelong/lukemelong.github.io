@@ -1,18 +1,11 @@
-import Box from "@mui/material/Box"
-import { LoadingSpinner } from '../css/LoadingSpinner'
+import { Box } from '@mui/system'
+import { LoadingSpinnerContainer, LoadingSpinnerxChildren } from './Loading/LoadingStyled'
 
 const Loading = ({ isDarkMode }) => {
-    const loadingContainerStyles = {
-        display: 'flex',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-
     return (
-        <Box sx={{ ...loadingContainerStyles }}>
-            <LoadingSpinner isDarkMode={isDarkMode}><div></div><div></div><div></div><div></div></LoadingSpinner>
-        </Box>
+        <LoadingSpinnerContainer>
+            <LoadingSpinnerxChildren isDarkMode={isDarkMode}><div></div><div></div><div></div><div></div></LoadingSpinnerxChildren>
+        </LoadingSpinnerContainer>
     )
 }
 
