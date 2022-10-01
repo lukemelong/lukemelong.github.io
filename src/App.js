@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 // Components
+import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Loading from './components/Loading'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 import ScoreCard from './components/ScoreCard'
 import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
@@ -25,10 +28,18 @@ const App = () => {
   const [loading, setLoading] = useState(false)
   const [gameData, setGameData] = useState()
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null)
   const [scale, setScale] = useState(1)
+  const menuOpen = Boolean(menuAnchorEl)
   // Event listeners
   const darkModeSwitchOnChange= () => {
     setIsDarkMode(!isDarkMode)
+  }
+  const menuOnClose = () => {
+    setMenuAnchorEl(null)
+  }
+  const menuOnOpen = (e) => {
+    setMenuAnchorEl(e.currentTarget)
   }
   const scaleOnChange = (e, newValue) => {
     setScale(newValue)
@@ -99,29 +110,60 @@ const App = () => {
             container
             spacing={4}
             >
-              <Grid item xs={4}>
-                  <Typography display="inline">Dark Mode</Typography>
-                  <Switch
-                  {...darkModeSwitchProps}
-                  onChange={darkModeSwitchOnChange}
-                  checked={isDarkMode}
-                  />
-              </Grid>
-              <Grid item xs={8}>
-                <Stack
-                direction="row"
-                spacing={2}
+              <Grid item xs={2}>
+                <Button
+                  aria-controls={menuOpen ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={menuOpen ? 'true' : undefined}
+                  onClick={menuOnOpen}
+                  sx={{ fontSize: '14px'}}
                 >
-                  <Typography display="inline">Scale</Typography>
-                  <Slider
-                  onChange={scaleOnChange}
-                  step={0.01}
-                  min={0.8}
-                  max={2}
-                  value={scale}
-                  ></Slider>
-                </Stack>
-
+                  Settings
+                </Button>
+                  <Menu
+                  anchorEl={menuAnchorEl}
+                  open={menuOpen}
+                  onClose={menuOnClose}
+                  >
+                    <MenuItem>
+                      <Typography
+                      display="inline"
+                      sx={{ fontSize: '14px'}}
+                      >
+                        Dark Mode
+                      </Typography>
+                      <Switch
+                      {...darkModeSwitchProps}
+                      onChange={darkModeSwitchOnChange}
+                      checked={isDarkMode}
+                      />
+                    </MenuItem>
+                    <MenuItem
+                    sx={{
+                      width: 300
+                    }}
+                    >
+                      <Stack
+                      direction="row"
+                      spacing={2}
+                      sx={{ width: '100%'}}
+                      >
+                        <Typography
+                        sx={{ fontSize: '14px'}}
+                        display="inline"
+                        >
+                          Scale
+                        </Typography>
+                        <Slider
+                        onChange={scaleOnChange}
+                        step={0.01}
+                        min={0.8}
+                        max={3}
+                        value={scale}
+                        ></Slider>
+                      </Stack>
+                    </MenuItem>
+                  </Menu>
               </Grid>
               <Grid item xs={12}>
                 <Stack
