@@ -42,7 +42,8 @@ import axios from 'axios'
                 name: homeTeam.team.name,
                 logo: homeTeam.team.logo,
                 score: homeTeam.score,
-                winner: homeTeam.winner
+                winner: homeTeam.winner,
+                record: `(${homeTeam.records[0].summary})`
             },
             awayTeam: {
                 id: awayTeam.id,
@@ -50,7 +51,8 @@ import axios from 'axios'
                 name: awayTeam.team.name,
                 logo: awayTeam.team.logo,
                 score: awayTeam.score,
-                winner: awayTeam.winner
+                winner: awayTeam.winner,
+                record: `(${awayTeam.records[0].summary})`
             }
         }
     })

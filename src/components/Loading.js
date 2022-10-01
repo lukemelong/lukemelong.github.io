@@ -1,4 +1,3 @@
-import { Box } from '@mui/system'
 import { LoadingSpinnerContainer, LoadingSpinnerxChildren } from './Loading/LoadingStyled'
 
 const Loading = ({ isDarkMode }) => {

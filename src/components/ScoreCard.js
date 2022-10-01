@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid'
 import SportsFootballIcon from '@mui/icons-material/SportsFootball';
 import TeamLogo from './TeamLogo'
 import Typography from '@mui/material/Typography'
+import { Stack } from '@mui/system';
+import { Record } from './ScoreCard/ScoreCardStyled'
 
 /**
  * ScoreCard shows the score for one sports game
@@ -79,7 +81,12 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         {displayPossession && !teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography fontWeight={awayTeam.winner && 'bold'}>{awayTeam.name}</Typography>
+                        <Stack>
+                            <Typography fontWeight={awayTeam.winner && 'bold'}>{awayTeam.name}</Typography>
+                            <Record>
+                                {awayTeam.record}
+                            </Record>
+                        </Stack>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{...scoreFontStyles}} fontWeight={awayTeam.winner && 'bold'}>{awayTeam.score}</Typography>
@@ -96,7 +103,12 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         {displayPossession && teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography fontWeight={homeTeam.winner && 'bold'}>{homeTeam.name}</Typography>
+                        <Stack>
+                            <Typography fontWeight={homeTeam.winner && 'bold'}>{homeTeam.name}</Typography>
+                            <Record>
+                                {homeTeam.record}
+                            </Record>
+                        </Stack>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography sx={{...scoreFontStyles}} fontWeight={homeTeam.winner && 'bold'}>{homeTeam.score}</Typography>
