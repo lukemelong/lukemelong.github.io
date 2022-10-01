@@ -1,12 +1,17 @@
 // Components
-import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
-import SportsFootballIcon from '@mui/icons-material/SportsFootball';
-import TeamLogo from './TeamLogo'
-import Typography from '@mui/material/Typography'
-import { Stack } from '@mui/system';
-import { Record } from './ScoreCard/ScoreCardStyled'
+import Stack from '@mui/material/Stack';
+import {
+    DownInfo,
+    PossessionIcon,
+    Record,
+    Score,
+    ScoreCardContainer,
+    TeamLogo,
+    TeamName,
+    Timer
+} from './ScoreCard/ScoreCardStyled'
 
 /**
  * ScoreCard shows the score for one sports game
@@ -26,40 +31,16 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
         isRedZone,
         possession,
     } = game
-    // Styling for when a team is in the redzone (https://en.wikipedia.org/wiki/Red_zone_(gridiron_football))
-    const redZoneColor = isDarkMode ? '#880808' : '#D22B2B'
     // Who has possession of the football. false is the away team, true is the home team
     const teamPossession = awayTeam.id === possession ? false : true
     const displayPossession = !gameCompleted && gameState !== "pre"
-    // Stylings
-
-    const cardStyles = {
-        bgcolor: isRedZone ? redZoneColor : '',
-        color: isRedZone ? 'white' : '',
-        width: 300 * scale,
-    }
-    const timerStyles = {
-        fontSize: 12 * scale,
-        marginBottom: 1 * scale,
-        minHeight: 14 * scale
-    }
-    const downDistanceStyles = {
-        ...timerStyles,
-        marginTop: 1 * scale,
-        marginBottom: 0,
-        minHeight: 14 * scale,
-    }
-    const possessionIconStyles = {
-        width: 15 * scale,
-        marginLeft: 2 * scale
-    }
-    const scoreFontStyles = {
-        textAlign: 'right'
-    }
-
 
     return (
-        <Card sx={{...cardStyles}}>
+        <ScoreCardContainer
+        isDarkMode={isDarkMode}
+        isRedZone={isRedZone}
+        scale={scale}
+        >
             <CardContent>
                 <Grid
                 container
@@ -67,7 +48,11 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                 >
                     {/* Row 1: Game status (Upcoming, In progress, Final) */}
                     <Grid item xs={12}>
-                        <Typography sx={{...timerStyles}}>{gameDetail}</Typography>
+                        <Timer
+                        scale={scale}
+                        >
+                            {gameDetail}
+                        </Timer>
                     </Grid>
                     {/* Row 2: Away Team */}
                     <Grid item xs={2}>
@@ -78,18 +63,20 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         />
                     </Grid>
                     <Grid item xs={2}>
-                        {displayPossession && !teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
+                        {displayPossession && !teamPossession && <PossessionIcon scale={scale}/>}
                     </Grid>
                     <Grid item xs={4}>
                         <Stack>
-                            <Typography fontWeight={awayTeam.winner && 'bold'}>{awayTeam.name}</Typography>
-                            <Record>
-                                {awayTeam.record}
-                            </Record>
+                            <TeamName winner={awayTeam.winner}>{awayTeam.name}</TeamName>
+                            <Record>{awayTeam.record}</Record>
                         </Stack>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography sx={{...scoreFontStyles}} fontWeight={awayTeam.winner && 'bold'}>{awayTeam.score}</Typography>
+                        <Score
+                        winner={awayTeam.winner}
+                        >
+                            {awayTeam.score}
+                        </Score>
                     </Grid>
                     {/* Row 3: Home Team */}
                     <Grid item xs={2}>
@@ -100,27 +87,25 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                         />
                     </Grid>
                     <Grid item xs={2}>
-                        {displayPossession && teamPossession && <SportsFootballIcon sx={{...possessionIconStyles}} />}
+                        {displayPossession && teamPossession && <PossessionIcon scale={scale}/>}
                     </Grid>
                     <Grid item xs={4}>
                         <Stack>
-                            <Typography fontWeight={homeTeam.winner && 'bold'}>{homeTeam.name}</Typography>
-                            <Record>
-                                {homeTeam.record}
-                            </Record>
+                            <TeamName winner={homeTeam.winner}>{homeTeam.name}</TeamName>
+                            <Record>{homeTeam.record}</Record>
                         </Stack>
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography sx={{...scoreFontStyles}} fontWeight={homeTeam.winner && 'bold'}>{homeTeam.score}</Typography>
+                        <Score winner={homeTeam.winner}>{homeTeam.score}</Score>
                     </Grid>
                     {/*  Row 4: Current down information */}
                     <Grid item xs={12}>
-                        <Typography sx={{...downDistanceStyles}}>{downDistanceText ? downDistanceText : ''}</Typography>
+                        <DownInfo scale={scale}>{downDistanceText}</DownInfo>
                     </Grid>
                 </Grid>
             </CardContent>
 
-        </Card>
+        </ScoreCardContainer>
     )
 }
 

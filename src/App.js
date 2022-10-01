@@ -1,26 +1,29 @@
 // Main
 import { useEffect, useState } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
 // Components
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Loading from './components/Loading'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import ScoreCard from './components/ScoreCard'
 import Slider from '@mui/material/Slider'
-import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
-import Typography from '@mui/material/Typography'
+import {
+  DarkModeLabel,
+  GameStack,
+  MainContainer,
+  MenuItemSlider,
+  SettingsButton,
+  ScaleSliderContainer,
+  ThemeWrapper,
+  ScaleSliderLabel,
+} from './components/App/AppStyled'
 // Utils
 import { getGameData } from './utils'
 // Testing
 import testData from './mockData/broncos_9ers_inplay.json'
 
 const App = () => {
-
   // Enable testing mode. Will use local TestingData. You can set testing data by importing a local json file
   const isTestMode = false
 
@@ -44,10 +47,12 @@ const App = () => {
   const scaleOnChange = (e, newValue) => {
     setScale(newValue)
   }
+
   // Refresh callback
   const refreshGameData = () => {
     getGameData(setLoading, false, setGameData, testData, isTestMode)
   }
+
   // Effects
   // Get sports scores data (currently only for NFL games)
   useEffect(() => {
@@ -70,20 +75,6 @@ const App = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.innerWidth])
 
-
-  // Styles
-  const theme = createTheme({
-    palette: {
-      mode: isDarkMode ? 'dark' : 'light',
-    },
-    typography: {
-      fontSize: 14 * scale,
-    }
-  });
-  const gameStackStyles = {
-    flexWrap: "wrap",
-    justifyContent: "center"
-  }
   // Input Props
   const darkModeSwitchProps = {
     inputProps: {
@@ -92,13 +83,12 @@ const App = () => {
   }
 
   return (
-      <ThemeProvider
-      theme={theme}
+      <ThemeWrapper
+      isDarkMode={isDarkMode}
+      scale={scale}
       >
-        <CssBaseline />
-        <Container
+        <MainContainer
         maxWidth="xxl"
-        sx={{ marginTop: 2}}
         >
           {
           loading ?
@@ -111,65 +101,48 @@ const App = () => {
             spacing={4}
             >
               <Grid item xs={2}>
-                <Button
+                <SettingsButton
                   aria-controls={menuOpen ? 'basic-menu' : undefined}
                   aria-haspopup="true"
                   aria-expanded={menuOpen ? 'true' : undefined}
                   onClick={menuOnOpen}
-                  sx={{ fontSize: '14px'}}
                 >
                   Settings
-                </Button>
-                  <Menu
-                  anchorEl={menuAnchorEl}
-                  open={menuOpen}
-                  onClose={menuOnClose}
-                  >
-                    <MenuItem>
-                      <Typography
-                      display="inline"
-                      sx={{ fontSize: '14px'}}
-                      >
-                        Dark Mode
-                      </Typography>
-                      <Switch
-                      {...darkModeSwitchProps}
-                      onChange={darkModeSwitchOnChange}
-                      checked={isDarkMode}
-                      />
-                    </MenuItem>
-                    <MenuItem
-                    sx={{
-                      width: 300
-                    }}
+                </SettingsButton>
+                <Menu
+                anchorEl={menuAnchorEl}
+                open={menuOpen}
+                onClose={menuOnClose}
+                >
+                  <MenuItem>
+                    <DarkModeLabel>Dark Mode</DarkModeLabel>
+                    <Switch
+                    {...darkModeSwitchProps}
+                    onChange={darkModeSwitchOnChange}
+                    checked={isDarkMode}
+                    />
+                  </MenuItem>
+                  <MenuItemSlider>
+                    <ScaleSliderContainer
+                    direction="row"
+                    spacing={2}
                     >
-                      <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ width: '100%'}}
-                      >
-                        <Typography
-                        sx={{ fontSize: '14px'}}
-                        display="inline"
-                        >
-                          Scale
-                        </Typography>
-                        <Slider
-                        onChange={scaleOnChange}
-                        step={0.01}
-                        min={0.8}
-                        max={3}
-                        value={scale}
-                        ></Slider>
-                      </Stack>
-                    </MenuItem>
-                  </Menu>
+                      <ScaleSliderLabel>Scale</ScaleSliderLabel>
+                      <Slider
+                      onChange={scaleOnChange}
+                      step={0.01}
+                      min={0.8}
+                      max={3}
+                      value={scale}
+                      ></Slider>
+                    </ScaleSliderContainer>
+                  </MenuItemSlider>
+                </Menu>
               </Grid>
               <Grid item xs={12}>
-                <Stack
+                <GameStack
                 direction="row"
                 gap={2}
-                sx={{...gameStackStyles}}
                 >
                   {gameData?.map(game =>
                     (
@@ -181,13 +154,13 @@ const App = () => {
                       />
                     )
                   )}
-                </Stack>
+                </GameStack>
               </Grid>
             </Grid>
           </>
         }
-        </Container>
-      </ThemeProvider>
+        </MainContainer>
+      </ThemeWrapper>
   );
 }
 
