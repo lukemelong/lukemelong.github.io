@@ -5,9 +5,10 @@ import Typography from '@mui/material/Typography'
 
 export const DownInfo = ({children, scale}) => {
     const style = {
-        fontSize: 12 * scale,
+        fontSize: 18 * scale,
         minHeight: 14 * scale,
         marginTop: 1 * scale,
+        textAlign: 'left'
     }
 
     return <Typography scale={scale} sx={style}>{children}</Typography>
@@ -21,9 +22,9 @@ export const PossessionIcon = ({scale}) => {
     return <SportsFootballIcon sx={style}/>
 }
 
-export const Record = ({children}) => {
+export const Record = ({children, scale}) => {
     const style = {
-        fontSize: 12
+        fontSize: 14 * scale,
     }
 
     return <Typography sx={style}>{children}</Typography>
@@ -32,6 +33,7 @@ export const Record = ({children}) => {
 export const Score = ({children, winner}) => {
     const style = {
         fontWeight: winner && 'bold',
+        marginRight: 1.8,
         textAlign: 'right',
     }
 
@@ -62,7 +64,7 @@ export const ScoreCardContainer = ({children, isDarkMode, isRedZone, scale}) => 
  export const TeamLogo = ({teamName, src, scale}) => {
     // Styles
     const style = {
-        maxWidth: 50 * scale
+        maxWidth: 45 * scale
     }
 
     return (
@@ -84,7 +86,7 @@ export const TeamName = ({children, winner}) => {
 
 export const Timer = ({children, scale}) => {
     const style = {
-        fontSize: 12 * scale,
+        fontSize: 16 * scale,
         marginBottom: 1 * scale,
         minHeight: 14 * scale
     }

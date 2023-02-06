@@ -72,7 +72,7 @@ export const ThemeWrapper = ({children, isDarkMode, scale}) => {
             mode: isDarkMode ? 'dark' : 'light',
         },
         typography: {
-            fontSize: 14 * scale,
+            fontSize: 18 * scale,
         }
     })
 

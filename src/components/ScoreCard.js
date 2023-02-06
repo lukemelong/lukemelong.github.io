@@ -69,7 +69,11 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                     <Grid item xs={4}>
                         <Stack>
                             <TeamName winner={awayTeam.winner}>{awayTeam.name}</TeamName>
-                            <Record>{awayTeam.record}</Record>
+                            <Record
+                            scale={scale}
+                            >
+                                {awayTeam.record.replace(/(|)/g, '')}
+                            </Record>
                         </Stack>
                     </Grid>
                     <Grid item xs={4}>
@@ -93,7 +97,11 @@ const ScoreCard = ({ game, isDarkMode, scale }) => {
                     <Grid item xs={4}>
                         <Stack>
                             <TeamName winner={homeTeam.winner}>{homeTeam.name}</TeamName>
-                            <Record>{homeTeam.record}</Record>
+                            <Record
+                            scale={scale}
+                            >
+                                {homeTeam.record}
+                            </Record>
                         </Stack>
                     </Grid>
                     <Grid item xs={4}>
