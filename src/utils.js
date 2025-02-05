@@ -43,7 +43,7 @@ import axios from 'axios'
                 logo: homeTeam.team.logo,
                 score: homeTeam.score,
                 winner: homeTeam.winner,
-                record: `(${homeTeam.records[0].summary})`
+                record: homeTeam.records ? `(${homeTeam.records[0].summary})` : "0-0"
             },
             awayTeam: {
                 id: awayTeam.id,
@@ -52,7 +52,7 @@ import axios from 'axios'
                 logo: awayTeam.team.logo,
                 score: awayTeam.score,
                 winner: awayTeam.winner,
-                record: `(${awayTeam.records[0].summary})`
+                record: awayTeam.record ? `(${awayTeam.records[0].summary})` : "0-0"
             }
         }
     })
@@ -81,7 +81,7 @@ export const getGameData = async (
     }
 
     if (shouldShowLoading) setLoading(true)
-    const url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
+    const url = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
     let request
     try {
         request = await axios.get(url)
